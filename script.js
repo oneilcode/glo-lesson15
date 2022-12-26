@@ -1,30 +1,21 @@
 'use strict';
 
-const DomElement = function (selector, height, width, bg, fontSize) {
-   this.selector = selector;
-   this.height = height;
-   this.width = width;
-   this.bg = bg;
-   this.fontSize = fontSize;
+class First {
+   constructor() {}
+   hello() {
+      console.log('Привет, я метод родителя');
+   }
+}
 
-   this.createObj = function () {
-      let obj;
+class Second extends First {
+   constructor() {
+      super();
+   }
+   hello() {
+      super.hello();
+      console.log('А я наследуемый метод!');
+   }
+}
 
-      if (this.selector.charAt(0) === '.') {
-         obj = document.createElement('div');
-      } else if (this.selector.charAt(0) === '#') {
-         obj = document.createElement('p');
-      }
-
-      obj.style.cssText = `height: ${this.height}px;
-      width: ${this.width}px;
-      background: ${this.bg};
-      font-size: ${this.fontSize}px;`;
-
-      return obj;
-   };
-};
-
-const newElement = new DomElement('.block', 200, 200, 'red', 20);
-
-document.body.prepend(newElement.createObj());
+const second = new Second();
+second.hello();
